@@ -64,7 +64,7 @@ describe('EMAIL', function() {
 			assert.fail(err);
 		}
 
-		console.log(result);
+		// console.log(result);
 		
 		assert.ok(result);
 
