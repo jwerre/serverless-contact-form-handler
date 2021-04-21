@@ -1,0 +1,8 @@
+{
+	"body": {
+		"fromEmail": "test@example.com",
+		"name": "Tester Testington",
+		"subject": "Message from example.com",
+		"message": "Thank you and good night"
+	}
+}

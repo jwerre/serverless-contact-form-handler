@@ -1,0 +1,61 @@
+# https://dev.to/adnanrahic/building-a-serverless-contact-form-with-aws-lambda-and-aws-ses-4jm0
+
+service: serverless-contact-form-handler
+
+provider:
+    name: aws
+    region: us-west-2
+    profile: default
+    # to change stage env: sls deploy --stage production
+    stage: ${opt:stage, 'staging'}
+    runtime: nodejs12.x
+    memorySize: 128
+    timeout: 5
+    stackName: ${self:service}
+    apiName: ${self:service}
+    iamRoleStatements:
+        - Effect: "Allow"
+          Action:
+            - "ses:SendEmail"
+          Resource: "*"
+
+    environment:
+        # 1. The email address to send the email to.
+        EMAIL: <TO EMAIL ADDRESS>
+        # 2. A comma delimited list of domains the email can be sent from.
+        ORIGINS: <HTTPS://EXAMPLE.COM,HTTPS://WWW.EXAMPLE.COM,HTTPS://EMAIL.EXAMPLE.COM>
+
+package:
+    excludeDevDependencies: true
+    patterns: # Specify the directories and files which should be included in the deployment package
+        - lib/**
+        - server.js
+        - '!.git/**'
+        - '!.test/**'
+        - '!.eslintrc'
+        - '!.package*'
+
+plugins:
+    - serverless-domain-manager
+
+# 3. Before setting up custom domain create an TSL certificate in AWS Certificate Manager
+custom:
+    customDomain:
+        domainName: <DOMAIN NAME>
+        certificateName: <NAME OF SSL CERTIFICATE>
+        createRoute53Record: true
+        endpointType: 'regional'
+        securityPolicy: tls_1_2
+        apiType: rest
+        autoDomain: false
+
+functions:
+    contact:
+        handler: server.contact
+        name: ${self:service}-contact
+        description: Serverless contact form.
+        events:
+            - http:
+                path: /contact
+                method: post
+                cors: true

@@ -1,0 +1,9 @@
+{
+	"profile": "default",
+	"sourceEmail": "noreply@example.com",
+	"fromEmail": "success@simulator.amazonses.com",
+	"toEmail": "noreply@example.com",
+	"name": "Tester Testington",
+	"subject": "Unit test...",
+	"message": "Testing contact form"
+};

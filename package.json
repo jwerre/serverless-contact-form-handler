@@ -1,0 +1,19 @@
+{
+  "name": "serverless-contact-form-handler",
+  "version": "1.0.0",
+  "description": "Serverless contact form form handler",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Jonah Werre <jonah@surveyplanet.com> (https://surveyplanet.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.889.0",
+    "mocha": "^8.3.2",
+    "serverless-domain-manager": "^5.1.0"
+  }
+}
