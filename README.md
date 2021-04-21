@@ -52,6 +52,8 @@ If you're deploing for the first time set up the custom domain like this:
 serverless create_domain
 ```
 
+If you have your aws credentials set up globally and you need to use a differnt profile you may need to unset them or use the `--aws-profile` flag.
+
 *If you have trouble creating the domain check out [serverless-domain-manager](https://github.com/amplify-education/serverless-domain-manager) for troubleshooting issues.*
 
 ### 3. Deploy the function
@@ -75,6 +77,15 @@ Once you've deployed the function you can test it out like this.
 serverless invoke serverless-contact-form-handler --path test/invoke.example.json
 ```
 
+You might also try a simple curl command:
+
+```bash
+curl -X POST https://www.EXAMPLE.com/contact \
+	--verbose \
+	-H "Content-Type: application/json" \
+	-H "Origin: https://www.EXAMPLE.com" \
+	-d "{\"email\":\"testing@example.com\", \"subject\": \"Test\", \"message\":\"curl test...\"}"
+```
 
 ## Test
 

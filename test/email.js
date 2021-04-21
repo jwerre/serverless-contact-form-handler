@@ -32,6 +32,24 @@ describe('EMAIL', function() {
 
 	});
 
+	it('should send an email', async function() {
+
+		let result,
+			email = new Email(fixtures);
+		
+		try {
+			result = await email.send();
+		} catch (err) {
+			assert.fail(err);
+		}
+
+		// console.log(result);
+		
+		assert.ok(result);
+
+	});
+
+
 	it('should not send an email from server since email message is missing', async function() {
 		
 		let result,
@@ -53,23 +71,7 @@ describe('EMAIL', function() {
 
 	});
 
-	it('should send an email', async function() {
-
-		let result,
-			email = new Email(fixtures);
-		
-		try {
-			result = await email.send();
-		} catch (err) {
-			assert.fail(err);
-		}
-
-		// console.log(result);
-		
-		assert.ok(result);
-
-	});
-
+	
 	it('should send an email from server', async function() {
 
 		let result,

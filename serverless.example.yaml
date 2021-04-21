@@ -1,6 +1,6 @@
 # https://dev.to/adnanrahic/building-a-serverless-contact-form-with-aws-lambda-and-aws-ses-4jm0
 
-service: serverless-contact-form-handler
+service: contact-handler
 
 provider:
     name: aws

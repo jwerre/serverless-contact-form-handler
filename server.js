@@ -11,25 +11,29 @@ function responseHandler (statusCode, payload, req) {
 		payload = payload.message;
 	}
 		
-	const origin = ORIGINS.includes(req.headers.origin) ? req.headers.origin : 'Origin',
-		res= {
-			statusCode: statusCode,
-			headers: {
-				// 'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': origin,
-				'Access-Control-Allow-Headers': 'x-requested-with',
-			},
-			body: JSON.stringify(payload)
-		};
+	const origin = ORIGINS.includes(req.headers.origin) ? req.headers.origin : 'Origin';
+
+	const res = {
+		statusCode: statusCode,
+		headers: {
+			// 'Access-Control-Allow-Origin': '*',
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': origin,
+			'Access-Control-Allow-Headers': 'x-requested-with',
+		},
+		body: JSON.stringify(payload)
+	};
 
 	return Promise.resolve(res);
 	
 }
 
 module.exports.contact = async function (request) {
+
+	// console.log('POST :: /contact');
+	// console.log(request.body);
 		
-	const body = JSON.parse(request.body) || {};
+	const body = Object.prototype.toString.call(request.body) === '[object String]' ? JSON.parse(request.body) : request.body;
 		
 	let response, args = {
 		sourceEmail: process.env.EMAIL,
